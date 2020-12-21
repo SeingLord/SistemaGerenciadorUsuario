@@ -1,0 +1,42 @@
+<form novalidate (ngSubmit)="adicionarUsuario()" [formGroup]="cadastroForm">
+    <label>Nome</label>
+    <input [(ngModel)]="Usuario.nome" formControlName="nome" class="form-control" type="text" required>
+    <p *ngIf="cadastroForm.get('nome').errors && (
+            cadastroForm.get('nome').dirty ||
+            cadastroForm.get('nome').touched)">Campo obrigatorio</p>
+
+    <label>Sobrenome</label>
+    <input [(ngModel)]="Usuario.sobrenome" [value]="Usuario.sobrenome" formControlName="sobrenome" class="form-control"
+        type="text" required>
+    <p *ngIf="cadastroForm.get('sobrenome').errors && (
+            cadastroForm.get('sobrenome').dirty ||
+            cadastroForm.get('sobrenome').touched)">Campo obrigatorio</p>
+
+    <label>E-mail</label>
+    <input class="form-control" [(ngModel)]="Usuario.email" formControlName="email" type="email" required email>
+    <p *ngIf="cadastroForm.get('email').errors && (
+            cadastroForm.get('email').dirty ||
+            cadastroForm.get('email').touched
+        )">Campo obrigatorio, preecha corretamente</p>
+    <label>Data nascimento</label>
+    <input formControlName="dataNascimento" [(ngModel)]="Usuario.dataNascimento" class="form-control" type="date"
+        required>
+    <p *ngIf="cadastroForm.get('dataNascimento').errors && (
+            cadastroForm.get('dataNascimento').dirty ||
+            cadastroForm.get('dataNascimento').touched
+        )">Campo obrigatorio, preecha corretamente</p>
+    <label>Escolariedade</label>
+
+    <select class="form-control" (change)="InserirNaClasseUsuarioId(Usuario.idEscolariedade)"
+        formControlName="escolariedade" name="escolariedade" id="escolariedade" [(ngModel)]="Usuario.idEscolariedade">
+        <option value="0" disabled></option>
+        <option value="1">Infantil</option>
+        <option value="2">Fundamental</option>
+        <option value="3">Médio</option>
+        <option value="4">Superior</option>
+    </select>
+    <p *ngIf="cadastroForm.get('escolariedade').errors && (
+        cadastroForm.get('escolariedade').dirty ||
+        cadastroForm.get('escolariedade').touched)">Campo obrigatorio</p>
+    <input class="btn btn-primary mt-4" type="submit" name="Salvar" id="salvar" [disabled]="!cadastroForm.valid">
+</form>
